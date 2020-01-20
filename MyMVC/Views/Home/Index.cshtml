@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <button onclick="geData()">Запросить данные с API</button>
+    <button onclick="addRowAfter()">Добавить строку ниже</button>
+    <button onclick="addRowBefore()">Добавить строку выше</button>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody class="table__body">
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>2</td>
+        </tr>
+    </tbody>
+</table>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    // Не работает.
+    //$(document).ajaxComplete(function () {
+    //    console.log("Triggered ajaxComplete handler.");
+    //});
+
+    function geData() {
+        $.ajax("/api/values")
+            .done(function () {
+                alert("success");
+            })
+            .fail(function () {
+                alert("error");
+            })
+            .always(function () {
+                alert("complete");
+            });
+    }
+
+    $('tr').click(function () {
+        $('tr').removeClass('active-row');
+        $(this).addClass('active-row');
+    });
+
+    function addRowAfter() {
+        var clone = $('.active-row').clone().removeClass('active-row');
+        $('.active-row').after(clone);
+    }
+
+    function addRowBefore() {
+        var clone = $('.active-row').clone().removeClass('active-row');
+        $('.active-row').before(clone);
+    }
+</script>
