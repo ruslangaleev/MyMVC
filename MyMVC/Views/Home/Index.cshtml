@@ -6,6 +6,8 @@
     <button onclick="geData()">Запросить данные с API</button>
     <button onclick="addRowAfter()">Добавить строку ниже</button>
     <button onclick="addRowBefore()">Добавить строку выше</button>
+    <button onclick="selectFirstRow()">Отметить первую строку</button>
+    <button onclick="selectLastRow()">Отметить последнюю строку</button>
 </div>
 
 <table class="table">
@@ -72,5 +74,13 @@
     function addRowBefore() {
         var clone = $('.active-row').clone().removeClass('active-row');
         $('.active-row').before(clone);
+    }
+
+    function selectFirstRow() {
+        $('tbody > tr:first-child').addClass('font-bold');
+    }
+
+    function selectLastRow() {
+        $('tbody > tr:last-child').addClass('font-bold');
     }
 </script>
